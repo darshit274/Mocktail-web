@@ -127,7 +127,7 @@ const PDFsPage: React.FC = () => {
 
       if (response.data.success) {
         // Transform API response to match UI expectations
-        console.log('Raw PDF data from API:', response.data.data.slice(0, 2)); // Show first 2 PDFs for debugging
+        // console.log('Raw PDF data from API:', response.data.data.slice(0, 2)); // Show first 2 PDFs for debugging
 
         const transformedPdfs = await Promise.all(
           response.data.data.map(async (pdf: any) => {
@@ -146,15 +146,15 @@ const PDFsPage: React.FC = () => {
               hasAccess = await checkPDFAccess(pdf.id);
             }
 
-            console.log(`PDF: ${pdf.title}`, {
-              rawPrice: pdf.price,
-              originalPrice,
-              discountPercentage,
-              discountedPrice,
-              is_free: pdf.is_free,
-              access_level: pdf.access_level,
-              hasAccess
-            });
+            // console.log(`PDF: ${pdf.title}`, {
+//               rawPrice: pdf.price,
+//               originalPrice,
+//               discountPercentage,
+//               discountedPrice,
+//               is_free: pdf.is_free,
+//               access_level: pdf.access_level,
+//               hasAccess
+//             });
 
             return {
               ...pdf,
@@ -183,14 +183,14 @@ const PDFsPage: React.FC = () => {
   // Removed handleDownload function for security
 
   const handlePreview = (pdf: PDF) => {
-    console.log('handlePreview called for PDF:', {
-      title: pdf.title,
-      isPremium: pdf.isPremium,
-      hasAccess: pdf.hasAccess,
-      is_free: pdf.is_free,
-      access_level: pdf.access_level,
-      price: pdf.price
-    });
+    // console.log('handlePreview called for PDF:', {
+//       title: pdf.title,
+//       isPremium: pdf.isPremium,
+//       hasAccess: pdf.hasAccess,
+//       is_free: pdf.is_free,
+//       access_level: pdf.access_level,
+//       price: pdf.price
+//     });
 
     if (!pdf.hasAccess && pdf.isPremium) {
       if (pdf.preview_pages && pdf.preview_pages > 0) {
@@ -221,8 +221,8 @@ const PDFsPage: React.FC = () => {
   const handlePurchase = (pdf: PDF) => {
     // Only proceed to payment if PDF is premium AND user doesn't have access
     if (!pdf.isPremium || pdf.hasAccess) {
-      console.log('Skipping payment - PDF is either free or user already has access');
-      console.log({ isPremium: pdf.isPremium, hasAccess: pdf.hasAccess, is_free: pdf.is_free, access_level: pdf.access_level });
+      // console.log('Skipping payment - PDF is either free or user already has access');
+      // console.log({ isPremium: pdf.isPremium, hasAccess: pdf.hasAccess, is_free: pdf.is_free, access_level: pdf.access_level });
       return;
     }
 

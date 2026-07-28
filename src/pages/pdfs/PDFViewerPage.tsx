@@ -20,7 +20,7 @@ const SecurePDFDisplay: React.FC<{ pdfDataUrl: string | null; isLoading: boolean
       
       const blob = new Blob([bytes], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
-      console.log('🔧 Created blob URL:', url);
+      // console.log('🔧 Created blob URL:', url);
       setBlobUrl(url);
 
       // Cleanup function to revoke blob URL
@@ -62,7 +62,7 @@ const SecurePDFDisplay: React.FC<{ pdfDataUrl: string | null; isLoading: boolean
         userSelect: 'none',
       }}
       onLoad={() => {
-        console.log('✅ PDF loaded securely via blob URL');
+        // console.log('✅ PDF loaded securely via blob URL');
       }}
       onError={() => {
         console.error('❌ PDF loading failed');
@@ -217,7 +217,7 @@ const PDFViewerPage: React.FC = () => {
   // Cleanup PDF data on component unmount
   useEffect(() => {
     return () => {
-      console.log('Clearing PDF data from memory on unmount');
+      // console.log('Clearing PDF data from memory on unmount');
       setPdfDataUrl(null);
     };
   }, []);
@@ -238,18 +238,18 @@ const PDFViewerPage: React.FC = () => {
       const authToken = sessionStorage.getItem('mocktail_token');
       const userData = sessionStorage.getItem('mocktail_user');
       
-      console.log('Auth token exists:', !!authToken);
-      console.log('User data exists:', !!userData);
+      // console.log('Auth token exists:', !!authToken);
+      // console.log('User data exists:', !!userData);
       
       if (!authToken) {
         throw new Error('Authentication required. Please log in first.');
       }
       
       // Step 2: Fetch PDF data using the configured API service (same as mobile app pattern)
-      console.log('Fetching PDF data from secure endpoint:', id);
+      // console.log('Fetching PDF data from secure endpoint:', id);
       
       const response = await api.get(`/pdfs/${id}/secure`);
-      console.log('📡 API Response received:', response.status);
+      // console.log('📡 API Response received:', response.status);
       
       if (!response.data) {
         throw new Error('No response data received');
@@ -257,11 +257,11 @@ const PDFViewerPage: React.FC = () => {
 
       // Parse JSON response to get base64 data
       const responseData = response.data;
-      console.log('📄 Response data structure:', {
-        success: responseData.success,
-        hasContent: !!responseData.data?.content,
-        contentLength: responseData.data?.content?.length || 0
-      });
+      // console.log('📄 Response data structure:', {
+//         success: responseData.success,
+//         hasContent: !!responseData.data?.content,
+//         contentLength: responseData.data?.content?.length || 0
+//       });
       
       if (!responseData.success || !responseData.data.content) {
         throw new Error('Invalid PDF response format');
@@ -270,7 +270,7 @@ const PDFViewerPage: React.FC = () => {
       // Use base64 data directly (no conversion needed)
       const pdfDataUrl = responseData.data.content; // This is already "data:application/pdf;base64,..."
       
-      console.log('PDF data loaded securely into memory');
+      // console.log('PDF data loaded securely into memory');
       setPdfDataUrl(pdfDataUrl);
       const expiryDate = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes from now
       setTokenExpiry(expiryDate);

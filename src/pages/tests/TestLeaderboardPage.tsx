@@ -69,16 +69,16 @@ const TestLeaderboardPage: React.FC = () => {
 
   const fetchLeaderboard = async () => {
     try {
-      console.log('Fetching leaderboard data from API for test series:', uuid);
+      // console.log('Fetching leaderboard data from API for test series:', uuid);
 
       // Try to fetch real leaderboard data from the test-series specific API
       const response = await api.get(`/leaderboard/test-series/${uuid}`);
 
       if (response.data.success) {
-        console.log('API response:', response.data);
+        // console.log('API response:', response.data);
 
         if (response.data.data.length > 0) {
-          console.log('API returned participant data:', response.data);
+          // console.log('API returned participant data:', response.data);
           const totalParticipants = response.data.data.length;
 
           // Transform the real API data to match our interface
@@ -120,10 +120,10 @@ const TestLeaderboardPage: React.FC = () => {
           };
 
           setLeaderboardData(leaderboardData);
-          console.log('Using real leaderboard data successfully');
+          // console.log('Using real leaderboard data successfully');
         } else {
           // No participants yet - show empty state
-          console.log('No participants found for this test series yet');
+          // console.log('No participants found for this test series yet');
           const emptyLeaderboardData: LeaderboardData = {
             category: {
               id: 1,
@@ -138,7 +138,7 @@ const TestLeaderboardPage: React.FC = () => {
           setLeaderboardData(emptyLeaderboardData);
         }
       } else {
-        console.log('API call failed');
+        // console.log('API call failed');
         // Fallback for API errors - could show demo data or error state
         const transformedLeaderboard = response.data.data.map((entry: any, index: number) => ({
           id: index + 1,

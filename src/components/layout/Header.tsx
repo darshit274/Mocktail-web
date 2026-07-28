@@ -13,15 +13,15 @@ const Header: React.FC = () => {
   React.useEffect(() => {
     const fetchProfileData = async () => {
       if (isAuthenticated && user) {
-        console.log('Header: Fetching profile data...');
+        // console.log('Header: Fetching profile data...');
         try {
           const profileResponse = await authService.getProfile();
-          console.log('Header: Profile response received', { avatarUrl: profileResponse.data?.avatarUrl });
+          // console.log('Header: Profile response received', { avatarUrl: profileResponse.data?.avatarUrl });
 
           if (profileResponse.success && profileResponse.data) {
             // Update Redux state with fresh profile data including avatar
             dispatch(updateUser(profileResponse.data));
-            console.log('Header: Redux updated with profile data');
+            // console.log('Header: Redux updated with profile data');
           }
         } catch (error) {
           console.error('Failed to fetch profile for header:', error);
@@ -57,7 +57,7 @@ const Header: React.FC = () => {
                     alt="Profile"
                     className="w-8 h-8 rounded-full object-cover border border-gray-200"
                     onError={(e) => {
-                      console.log('Header avatar failed to load:', user?.avatarUrl || (user as any)?.profileImage);
+                      // console.log('Header avatar failed to load:', user?.avatarUrl || (user as any)?.profileImage);
                       // Fallback to initials if image fails to load
                       e.currentTarget.style.display = 'none';
                       e.currentTarget.nextElementSibling?.classList.remove('hidden');

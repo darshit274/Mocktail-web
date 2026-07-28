@@ -104,10 +104,10 @@ const TestSeriesDetailPage: React.FC = () => {
       const response = await api.get("/test-history", {
         params: { page: 1, limit: 100 },
       });
-      console.log("📚 [TestSeriesDetail] Test history API response:", response.data);
+      // console.log("📚 [TestSeriesDetail] Test history API response:", response.data);
       if (response.data.success && response.data.data.history) {
-        console.log("📚 [TestSeriesDetail] History items:", response.data.data.history.length);
-        console.log("📚 [TestSeriesDetail] First item sample:", response.data.data.history[0]);
+        // console.log("📚 [TestSeriesDetail] History items:", response.data.data.history.length);
+        // console.log("📚 [TestSeriesDetail] First item sample:", response.data.data.history[0]);
         setTestHistory(response.data.data.history);
       }
     } catch (error) {
@@ -118,7 +118,7 @@ const TestSeriesDetailPage: React.FC = () => {
 
   const isCategoryCompleted = (categoryUuid: string) => {
     if (!testHistory || testHistory.length === 0) {
-      console.log(`🔍 [TestSeriesDetail] No test history for ${categoryUuid}`);
+      // console.log(`🔍 [TestSeriesDetail] No test history for ${categoryUuid}`);
       return false;
     }
 
@@ -127,17 +127,17 @@ const TestSeriesDetailPage: React.FC = () => {
       const matchesCategoryUuid = item.categoryUuid === categoryUuid;
       const matchesTestUuid = item.testUuid === categoryUuid;
 
-      console.log(`🔍 [TestSeriesDetail] Checking ${categoryUuid}:`, {
-        itemCategoryUuid: item.categoryUuid,
-        itemTestUuid: item.testUuid,
-        matchesCategoryUuid,
-        matchesTestUuid,
-      });
+      // console.log(`🔍 [TestSeriesDetail] Checking ${categoryUuid}:`, {
+//         itemCategoryUuid: item.categoryUuid,
+//         itemTestUuid: item.testUuid,
+//         matchesCategoryUuid,
+//         matchesTestUuid,
+//       });
 
       return matchesCategoryUuid || matchesTestUuid;
     });
 
-    console.log(`✅ [TestSeriesDetail] Category ${categoryUuid} completed:`, completed);
+    // console.log(`✅ [TestSeriesDetail] Category ${categoryUuid} completed:`, completed);
     return completed;
   };
 

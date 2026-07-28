@@ -75,9 +75,9 @@ const ProfileEditPage: React.FC = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        console.log('Fetching profile data...');
+        // console.log('Fetching profile data...');
         const response = await authService.getProfile();
-        console.log('Profile response:', response);
+        // console.log('Profile response:', response);
         
         if (response.success && response.data) {
           const profile = response.data;
@@ -95,7 +95,7 @@ const ProfileEditPage: React.FC = () => {
             state: profile.state || '',
           };
           
-          console.log('Setting form data:', formData);
+          // console.log('Setting form data:', formData);
           profileForm.reset(formData);
           setHasChanges(false);
         } else {
@@ -115,7 +115,7 @@ const ProfileEditPage: React.FC = () => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    console.log('Image upload started:', { name: file.name, size: file.size, type: file.type });
+    // console.log('Image upload started:', { name: file.name, size: file.size, type: file.type });
 
     if (file.size > 5 * 1024 * 1024) {
       toast.error('File size must be less than 5MB');
@@ -129,7 +129,7 @@ const ProfileEditPage: React.FC = () => {
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      console.log('Image converted to base64, length:', (reader.result as string).length);
+      // console.log('Image converted to base64, length:', (reader.result as string).length);
       setImageUri(reader.result as string);
       setHasChanges(true);
     };
@@ -139,7 +139,7 @@ const ProfileEditPage: React.FC = () => {
   const onSubmit = async (data: ProfileFormData) => {
     try {
       setIsUpdating(true);
-      console.log('Submitting profile update:', data);
+      // console.log('Submitting profile update:', data);
 
       // Prepare update payload - match mobile app format
       const updateData: any = {
@@ -155,17 +155,17 @@ const ProfileEditPage: React.FC = () => {
       // Handle image upload if changed
       if (imageUri && imageUri !== userProfile?.avatarUrl && imageUri.startsWith('data:')) {
         try {
-          console.log('Converting base64 to blob...');
+          // console.log('Converting base64 to blob...');
           
           // Convert base64 to blob more safely
           const base64Response = await fetch(imageUri);
           const blob = await base64Response.blob();
           
-          console.log('Blob created successfully:', { 
-            size: blob.size, 
-            type: blob.type,
-            isValidBlob: blob instanceof Blob 
-          });
+          // console.log('Blob created successfully:', { 
+//             size: blob.size, 
+//             type: blob.type,
+//             isValidBlob: blob instanceof Blob 
+//           });
           
           if (blob.size === 0) {
             throw new Error('Blob is empty');
@@ -181,7 +181,7 @@ const ProfileEditPage: React.FC = () => {
 
       // Use single endpoint like mobile app
       const profileResponse = await authService.updateProfile(updateData);
-      console.log('Update response:', profileResponse);
+      // console.log('Update response:', profileResponse);
       
       if (!profileResponse.success) {
         toast.error(profileResponse.message || 'Failed to update profile');
@@ -193,7 +193,7 @@ const ProfileEditPage: React.FC = () => {
       if (profileResponse.data.avatarUrl) {
         setImageUri(profileResponse.data.avatarUrl);
       }
-      console.log('Dispatching updateUser with:', profileResponse.data);
+      // console.log('Dispatching updateUser with:', profileResponse.data);
       dispatch(updateUser(profileResponse.data));
       
       toast.success('Profile updated successfully!');

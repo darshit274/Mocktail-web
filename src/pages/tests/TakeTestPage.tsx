@@ -248,7 +248,7 @@ const TakeTestPage: React.FC = () => {
           return;
         }
       } catch (categoryError: any) {
-        console.log("Category endpoint failed, trying test series approach...");
+        // console.log("Category endpoint failed, trying test series approach...");
 
         // If category approach fails, try test series approach (for free tests)
         try {
@@ -318,7 +318,7 @@ const TakeTestPage: React.FC = () => {
 
       // Handle authentication errors
       if (error?.response?.status === 401) {
-        console.log("❌ 401 Authentication error - redirecting to login");
+        // console.log("❌ 401 Authentication error - redirecting to login");
         toast.error("Authentication required. Please log in again.");
         window.location.href = "/login";
         return;
@@ -326,7 +326,7 @@ const TakeTestPage: React.FC = () => {
 
       // Handle access denied errors
       if (error?.response?.status === 403) {
-        console.log("❌ 403 Access denied error");
+        // console.log("❌ 403 Access denied error");
         toast.error("Access denied. This quiz requires a subscription.");
         return;
       }
@@ -462,7 +462,7 @@ const TakeTestPage: React.FC = () => {
         totalTimeSpent: totalTimeSpent,
       });
 
-      console.log("Quiz submission response:", submitResponse.data);
+      // console.log("Quiz submission response:", submitResponse.data);
 
       if (submitResponse.data.success) {
         // Store backend-calculated results
@@ -500,11 +500,11 @@ const TakeTestPage: React.FC = () => {
 
         }
 
-        console.log("✅ Using backend-calculated results:", {
-          percentage: data.percentage,
-          finalScore: data.finalScore,
-          negativeMarking: data.negativeMarkingEnabled,
-        });
+        // console.log("✅ Using backend-calculated results:", {
+//           percentage: data.percentage,
+//           finalScore: data.finalScore,
+//           negativeMarking: data.negativeMarkingEnabled,
+//         });
 
         toast.success("Quiz submitted successfully!");
         // Only show results if API call succeeds
@@ -839,17 +839,17 @@ const TakeTestPage: React.FC = () => {
         ? Math.round((correctAnswers / answeredQuestions) * 100)
         : 0);
 
-    console.log("📊 Frontend Quiz Results Display:", {
-      totalQuestions,
-      answeredQuestions,
-      correctAnswers,
-      wrongAnswers,
-      notAttempted,
-      accuracy: accuracy + "%",
-      finalScore: obtainedMarks,
-      backendData: backendResults,
-      formula: `Accuracy = ${correctAnswers}/${answeredQuestions} × 100 = ${accuracy}%`,
-    });
+    // console.log("📊 Frontend Quiz Results Display:", {
+//       totalQuestions,
+//       answeredQuestions,
+//       correctAnswers,
+//       wrongAnswers,
+//       notAttempted,
+//       accuracy: accuracy + "%",
+//       finalScore: obtainedMarks,
+//       backendData: backendResults,
+//       formula: `Accuracy = ${correctAnswers}/${answeredQuestions} × 100 = ${accuracy}%`,
+//     });
 
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">

@@ -67,18 +67,18 @@ const PaymentPage: React.FC = () => {
   const itemDetails = state?.item;
   const description = state?.description || itemDetails?.description;
 
-  console.log('PaymentPage received data:', {
-    searchParams: Object.fromEntries(searchParams.entries()),
-    state,
-    calculatedPrice: price,
-    priceComponents: {
-      fromParams: searchParams.get('price'),
-      fromStateAmount: state?.amount,
-      fromItemDiscounted: state?.item?.discountedPrice,
-      fromItemOriginal: state?.item?.originalPrice,
-      fromItemPrice: state?.item?.price
-    }
-  });
+  // console.log('PaymentPage received data:', {
+//     searchParams: Object.fromEntries(searchParams.entries()),
+//     state,
+//     calculatedPrice: price,
+//     priceComponents: {
+//       fromParams: searchParams.get('price'),
+//       fromStateAmount: state?.amount,
+//       fromItemDiscounted: state?.item?.discountedPrice,
+//       fromItemOriginal: state?.item?.originalPrice,
+//       fromItemPrice: state?.item?.price
+//     }
+//   });
 
   const paymentMethods: PaymentMethod[] = [
     {
@@ -166,12 +166,12 @@ const PaymentPage: React.FC = () => {
 
     try {
       // Step 1: Create payment order
-      console.log('Creating payment order...');
+      // console.log('Creating payment order...');
       const orderData = await createPaymentOrder();
-      console.log('Payment order created:', orderData);
+      // console.log('Payment order created:', orderData);
 
       // Step 2: Initialize Razorpay with user details from API
-      console.log('🔐 Using user details for Razorpay prefill:', orderData.data.userDetails);
+      // console.log('🔐 Using user details for Razorpay prefill:', orderData.data.userDetails);
 
       const options = {
         key: orderData.data.keyId,
@@ -182,12 +182,12 @@ const PaymentPage: React.FC = () => {
         description: `Payment for ${orderData.data.itemDetails.name}`,
         image: '/favicon.ico',
         handler: async function (response: any) {
-          console.log('Payment successful:', response);
+          // console.log('Payment successful:', response);
 
           try {
             // Step 3: Verify payment
             const verifyResult = await verifyPayment(response, orderData.data.subscriptionId);
-            console.log('Payment verified:', verifyResult);
+            // console.log('Payment verified:', verifyResult);
 
             if (type === 'pdf') {
               toast.success('Payment successful! You now have access to this PDF.');
@@ -222,7 +222,7 @@ const PaymentPage: React.FC = () => {
         },
         modal: {
           ondismiss: function () {
-            console.log('Payment modal closed');
+            // console.log('Payment modal closed');
             setIsProcessing(false);
           }
         }

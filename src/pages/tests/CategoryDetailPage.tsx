@@ -167,10 +167,10 @@ const CategoryDetailPage: React.FC = () => {
       const response = await api.get('/test-history', {
         params: { page: 1, limit: 100 },
       });
-      console.log('📚 [CategoryDetail] Test history API response:', response.data);
+      // console.log('📚 [CategoryDetail] Test history API response:', response.data);
       if (response.data.success && response.data.data.history) {
-        console.log('📚 [CategoryDetail] History items:', response.data.data.history.length);
-        console.log('📚 [CategoryDetail] First item sample:', response.data.data.history[0]);
+        // console.log('📚 [CategoryDetail] History items:', response.data.data.history.length);
+        // console.log('📚 [CategoryDetail] First item sample:', response.data.data.history[0]);
         setTestHistory(response.data.data.history);
       }
     } catch (error) {
@@ -181,7 +181,7 @@ const CategoryDetailPage: React.FC = () => {
 
   const isCurrentCategoryCompleted = (): boolean => {
     if (!testHistory || testHistory.length === 0 || !uuid) {
-      console.log(`🔍 [CategoryDetail] No test history for ${uuid}`);
+      // console.log(`🔍 [CategoryDetail] No test history for ${uuid}`);
       return false;
     }
 
@@ -190,17 +190,17 @@ const CategoryDetailPage: React.FC = () => {
       const matchesCategoryUuid = item.categoryUuid === uuid;
       const matchesTestUuid = item.testUuid === uuid;
 
-      console.log(`🔍 [CategoryDetail] Checking ${uuid}:`, {
-        itemCategoryUuid: item.categoryUuid,
-        itemTestUuid: item.testUuid,
-        matchesCategoryUuid,
-        matchesTestUuid,
-      });
+      // console.log(`🔍 [CategoryDetail] Checking ${uuid}:`, {
+//         itemCategoryUuid: item.categoryUuid,
+//         itemTestUuid: item.testUuid,
+//         matchesCategoryUuid,
+//         matchesTestUuid,
+//       });
 
       return matchesCategoryUuid || matchesTestUuid;
     });
 
-    console.log(`✅ [CategoryDetail] Category ${uuid} completed:`, completed);
+    // console.log(`✅ [CategoryDetail] Category ${uuid} completed:`, completed);
     return completed;
   };
 
@@ -259,14 +259,14 @@ const CategoryDetailPage: React.FC = () => {
   };
 
   const handleStartQuiz = async () => {
-    console.log('🎮 Starting quiz - Debug info:', {
-      category: category?.name,
-      seriesUuid,
-      seriesName,
-      questionsCount: category?.questions?.length,
-      nodeType: category?.node_type,
-      isFreeInPaidSeries: category?.is_free_in_paid_series
-    });
+    // console.log('🎮 Starting quiz - Debug info:', {
+//       category: category?.name,
+//       seriesUuid,
+//       seriesName,
+//       questionsCount: category?.questions?.length,
+//       nodeType: category?.node_type,
+//       isFreeInPaidSeries: category?.is_free_in_paid_series
+//     });
 
     if (!category || !category.questions || category.questions.length === 0) {
       toast.error('No questions available in this category');
@@ -277,16 +277,16 @@ const CategoryDetailPage: React.FC = () => {
     if (subscriptionAccess.isPaidSeries && !subscriptionAccess.hasAccess) {
       // If this is a free sample in a paid series, allow access
       if (category.is_free_in_paid_series === true) {
-        console.log('✅ Free sample in paid series - allowing quiz');
+        // console.log('✅ Free sample in paid series - allowing quiz');
       } else {
         // Not a free sample - block access
-        console.log('❌ Locked test - blocking access');
+        // console.log('❌ Locked test - blocking access');
         toast.error('This test requires a subscription. Please purchase the test series to access this content.');
         return;
       }
     }
 
-    console.log('✅ Navigating to quiz page');
+    // console.log('✅ Navigating to quiz page');
     navigate(`/tests/quiz/${uuid}`, {
       state: {
         categoryName: category.name,

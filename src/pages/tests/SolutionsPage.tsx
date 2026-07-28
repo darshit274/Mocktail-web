@@ -152,11 +152,11 @@ const SolutionsPage: React.FC = () => {
   // Fetch session-based solutions (from test history)
   const fetchSessionSolutions = async (sessionId: string) => {
     try {
-      console.log('📜 Fetching session-based solutions for sessionId:', sessionId);
+      // console.log('📜 Fetching session-based solutions for sessionId:', sessionId);
 
       const response = await api.get(`/test-history/${sessionId}/solutions`);
 
-      console.log('Session API Response:', response);
+      // console.log('Session API Response:', response);
 
       if (response.data.success) {
         const data = response.data.data;
@@ -214,11 +214,11 @@ const SolutionsPage: React.FC = () => {
         setScore(correctCount);
         setPercentage(Math.round((correctCount / data.totalQuestions) * 100));
 
-        console.log('✅ Session solutions loaded:', {
-          userAnswers: sessionUserAnswers,
-          markedQuestions: sessionMarkedQuestions,
-          score: correctCount
-        });
+        // console.log('✅ Session solutions loaded:', {
+//           userAnswers: sessionUserAnswers,
+//           markedQuestions: sessionMarkedQuestions,
+//           score: correctCount
+//         });
       } else {
         console.error('Session API returned success: false', response.data);
         toast.error(response.data.message || 'Failed to load session solutions');
@@ -234,16 +234,16 @@ const SolutionsPage: React.FC = () => {
   // Fetch category-based solutions (immediate after submission)
   const fetchSolutions = async () => {
     try {
-      console.log('Fetching solutions for UUID:', uuid);
-      console.log('API URL:', `/test-history/${uuid}/solutions`);
-      console.log('Using language:', language);
+      // console.log('Fetching solutions for UUID:', uuid);
+      // console.log('API URL:', `/test-history/${uuid}/solutions`);
+      // console.log('Using language:', language);
 
       // Don't pass `language` — backend defaults to returning English in `questionText`/`options`
       // and raw Gujarati separately, so we can switch languages client-side without re-fetching
       const response = await api.get(`/test-history/${uuid}/solutions`);
 
-      console.log('API Response:', response);
-      console.log('Response data:', response.data);
+      // console.log('API Response:', response);
+      // console.log('Response data:', response.data);
 
       if (response.data.success) {
         const data = response.data.data;
@@ -275,7 +275,7 @@ const SolutionsPage: React.FC = () => {
             language
           }
         });
-        console.log('Solutions data set:', data);
+        // console.log('Solutions data set:', data);
       } else {
         console.error('API returned success: false', response.data);
         toast.error(response.data.message || 'Failed to load solutions');

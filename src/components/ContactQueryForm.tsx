@@ -53,7 +53,7 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted with data:', formData);
+    // console.log('Form submitted with data:', formData);
     setErrors({});
     setSuccessMessage('');
     setErrorMessage('');
@@ -61,9 +61,9 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
     // Validate
     try {
       contactQuerySchema.parse(formData);
-      console.log('Validation passed');
+      // console.log('Validation passed');
     } catch (error) {
-      console.log('Validation failed:', error);
+      // console.log('Validation failed:', error);
       if (error instanceof z.ZodError && error.errors) {
         const newErrors: Partial<Record<keyof ContactQueryFormData, string>> = {};
         error.errors.forEach(err => {
@@ -72,7 +72,7 @@ const ContactQueryForm: React.FC<ContactQueryFormProps> = ({ variant = 'full', o
           }
         });
         setErrors(newErrors);
-        console.log('Validation errors:', newErrors);
+        // console.log('Validation errors:', newErrors);
       }
       return;
     }
